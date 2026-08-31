@@ -1,3 +1,7 @@
+/* FasterEdge 开源项目
+ * GitHub: https://github.com/FasterEdge
+ * Gitee:  https://gitee.com/FasterEdge
+ */
 // fe_port.c — FasterEdge MCU 平台移植层实现（Arduino Uno R4 / RA4M1 版）
 // 真实实现：通过 Arduino 核心库桥接（fe_port_arduino.cpp 提供 extern "C" API）。
 //   UART0  : Serial（USB-CDC）
