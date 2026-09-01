@@ -1,3 +1,8 @@
+// ─────────────────────────────────────────────────────────────
+// FasterEdge 开源项目
+// Github: https://github.com/FasterEdge
+// Gitee:  https://gitee.com/FasterEdge
+// ─────────────────────────────────────────────────────────────
 // ability_onekey.cpp — OneKeyAbility 实现（Arduino Uno R3 版）
 // 令牌 = HMAC-SHA256(secret, "seq:subject")，base64url 呈现。
 // 密钥与序列号通过 EEPROM 持久化（RA4M1 EEPROM 模拟 8KB）。

@@ -1,3 +1,8 @@
+// ─────────────────────────────────────────────────────────────
+// FasterEdge 开源项目
+// Github: https://github.com/FasterEdge
+// Gitee:  https://gitee.com/FasterEdge
+// ─────────────────────────────────────────────────────────────
 // fe_port_arduino.cpp — Arduino 核心库桥接（Arduino Uno R4 / RA4M1 版）
 // 以 extern "C" 导出 C 可调用的平台原语，供 fe_port.c 使用。
 #include <Arduino.h>
