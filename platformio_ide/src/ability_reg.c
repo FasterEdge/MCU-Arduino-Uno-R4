@@ -1,3 +1,4 @@
+// FasterEdge 开源项目 - Github: https://github.com/FasterEdge - Gitee: https://gitee.com/FasterEdge
 // ability_reg.c — RegAbility 实现（Arduino Uno R4 / RA4M1 版，MCU 专有）
 // MCU 专有能力：内存映射寄存器读写（32 位，RA4M1 外设 0x40000000+）。
 //   read <addr>              读 32 位
