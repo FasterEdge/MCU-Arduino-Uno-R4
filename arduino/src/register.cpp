@@ -43,7 +43,7 @@ void registerAllAbilities(Atom &atom) {
     atom.registerAbility({ "ModbusAbility", "Modbus", modbusAbilityCmds, sizeof(modbusAbilityCmds)/sizeof(modbusAbilityCmds[0]), &g_modbusAbility, modbusAbilityDispatch });
     atom.registerAbility({ "RegAbility",    "寄存器操作(专有)", regAbilityCmds, sizeof(regAbilityCmds)/sizeof(regAbilityCmds[0]), &g_regAbility,   regAbilityDispatch });
     atom.registerAbility({ "GpioAbility",   "引脚 GPIO(专有)", gpioAbilityCmds, sizeof(gpioAbilityCmds)/sizeof(gpioAbilityCmds[0]), &g_gpioAbility, gpioAbilityDispatch });
-    EEPROM.begin(8192);
+    EEPROM.begin();     // Renesas RA 的 EEPROM 模拟库 begin() 无参数(不同于 ESP32 的 begin(size))
     g_serialAbility.open = false; g_serialAbility.baud = 115200;
     g_modbusAbility.unitId = 1;
     g_modbusAbility.holdingRegs.assign(32, 0);
