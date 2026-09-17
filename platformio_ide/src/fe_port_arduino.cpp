@@ -32,7 +32,21 @@ void fe_arduino_eeprom_begin(uint16_t sz) { (void)sz; EEPROM.begin(); } // Renes
 
 uint32_t fe_arduino_millis(void) { return millis(); }
 
-uint32_t fe_arduino_random(void) { return (uint32_t)random(0x7FFFFFFF); }
+uint32_t fe_arduino_random(void) {
+    // 首次调用用浮空 A0 的 ADC 低位噪声 + 上电时间播种。Arduino random() 未播种时
+    // 序列固定, 所有设备首次上电会生成相同 HMAC secret(onekey), 攻击者可离线
+    // 算出 secret 并伪造任意设备的鉴权 token。
+    static bool seeded = false;
+    if (!seeded) {
+        uint32_t s = (uint32_t)millis();
+        for (int i = 0; i < 8; i++) {
+            s ^= ((uint32_t)analogRead(A0) & 3u) << (i * 2);
+        }
+        randomSeed(s);
+        seeded = true;
+    }
+    return (uint32_t)random(0x7FFFFFFF);
+}
 
 int fe_arduino_gpio_set_mode(uint8_t pin, const char *mode) {
     if (strcmp(mode, "input") == 0) pinMode(pin, INPUT);
