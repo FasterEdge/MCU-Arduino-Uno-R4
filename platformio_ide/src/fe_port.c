@@ -20,11 +20,12 @@
 int fe_snprintf(char *buf, u16 size, const char *fmt, ...) {
     va_list ap;
     int n;
+    if (size == 0) return 0;
     va_start(ap, fmt);
     n = vsnprintf(buf, size, fmt, ap);
     va_end(ap);
     if (n < 0) { buf[0] = 0; return 0; }
-    if ((u16)n >= size) buf[size - 1] = 0;
+    if ((u16)n >= size) { buf[size - 1] = 0; return (int)(size - 1); }
     return n;
 }
 
