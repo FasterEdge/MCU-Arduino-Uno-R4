@@ -28,7 +28,7 @@ uint8_t fe_arduino_eeprom_read(uint16_t addr) { return EEPROM.read(addr); }
 
 void fe_arduino_eeprom_write(uint16_t addr, uint8_t val) { EEPROM.write(addr, val); }
 
-void fe_arduino_eeprom_begin(uint16_t sz) { EEPROM.begin(sz); }
+void fe_arduino_eeprom_begin(uint16_t sz) { (void)sz; EEPROM.begin(); } // Renesas RA EEPROM.begin() 无参数
 
 uint32_t fe_arduino_millis(void) { return millis(); }
 

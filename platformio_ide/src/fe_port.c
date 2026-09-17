@@ -114,12 +114,20 @@ u8 fe_port_eeprom_set_u32(u16 addr, u32 value) {
 extern u32 fe_arduino_millis(void);
 static u32 s_epoch = 0;
 
+void fe_port_timer0_init(void) {
+    // R4 时间用 Arduino millis()(底层硬件定时器驱动), 无需额外 1ms 节拍;
+    // 空实现仅为满足 main.c 的调用(此前缺失导致 undefined reference 链接失败)。
+    // 顺带初始化 EEPROM 模拟库(此前从未调用 begin(), 配置/令牌无法持久化)。
+    fe_arduino_eeprom_begin(EEPROM_SIZE);
+}
+
 u32 fe_port_time_now(void) {
     return s_epoch + fe_arduino_millis() / 1000UL;
 }
 
 void fe_port_time_set(u32 epoch) {
-    s_epoch = epoch;
+    // 存 epoch - uptime: 否则 now = epoch + uptime, sync 后 get_time 二次计数。
+    s_epoch = epoch - fe_arduino_millis() / 1000UL;
 }
 
 // ============================================================
